@@ -1,0 +1,81 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start"><ion-back-button defaultHref="/sessions"></ion-back-button></ion-buttons>
+        <ion-title>{{ headerTitle() }}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="deleteSession()" color="danger">Delete</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <section style="padding:12px;">
+        <h2 style="margin:6px 0;">Tap a player to award a point. Long-press to add a note.</h2>
+        <ion-grid>
+            <ion-row>
+                @for(p of players(); track p.id) {
+                    <ion-col size="6" size-md="4" size-lg="3">
+                        <ion-card (click)="addPoint(p.id)" longPress (longPress)="addPointWithNote(p.id)"
+                            style="position:relative;">
+                            <ion-card-header>
+                                <ion-card-title>{{ p.name }} 
+                                    @if(p.number) {
+                                        <span>#{{ p.number }}</span>
+                                    }
+                                </ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <ion-badge>{{ countFor(p.id) }}</ion-badge>
+                                </div>
+                            </ion-card-content>
+                            <ion-button fill="clear" color="medium" style="position:absolute;top:4px;right:4px;"
+                                (click)="$event.stopPropagation(); decPoint(p.id)">−</ion-button>
+                        </ion-card>
+                    </ion-col>
+                }
+            </ion-row>
+        </ion-grid>
+    </section>
+
+    <section style="padding:12px;">
+        <ion-card>
+            <ion-card-header><ion-card-title>Session Leaderboard</ion-card-title></ion-card-header>
+            <ion-card-content>
+                <ion-list>
+                    @for(row of leaderboard(); track row.playerId; let i = $index) {
+                        <ion-item>
+                            <ion-label>
+                                <h3>{{ i+1 }}. {{ nameFor(row.playerId) }}</h3>
+                                <p>{{ row.count }} point(s)</p>
+                            </ion-label>
+                            @if(i < winnersCount()) {
+                                <ion-badge slot="end" color="success">Winner</ion-badge>
+                            }
+                        </ion-item>
+                    }
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+    </section>
+
+    <section style="padding:12px;">
+        <ion-card>
+            <ion-card-header><ion-card-title>Recent Points</ion-card-title></ion-card-header>
+            <ion-card-content>
+                <ion-list>
+                    @for(e of recentPoints(); track e.playerId) {
+                        <ion-item>
+                            <ion-label>
+                                <h3>{{ nameFor(e.playerId) }} — {{ e.timestamp | date:'shortTime' }}</h3>
+                                @if(e.note) {
+                                    <p>“{{ e.note }}”</p>
+                                }
+                            </ion-label>
+                        </ion-item>
+                    }
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+    </section>
+</ion-content>

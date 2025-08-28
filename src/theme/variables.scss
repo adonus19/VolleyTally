@@ -1,2 +1,9 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+:root {
+    --ion-color-primary: #3880ff;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-secondary: #5260ff;
+    --ion-color-secondary-contrast: #ffffff;
+    }
+    :root, .ios, .md { --ion-font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }

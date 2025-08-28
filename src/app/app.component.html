@@ -1,3 +1,21 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="sessions" [routerLink]="['/sessions']">
+      <ion-icon name="calendar"></ion-icon>
+      <ion-label>Sessions</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="roster" [routerLink]="['/roster']">
+      <ion-icon name="people"></ion-icon>
+      <ion-label>Roster</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="leaderboard" [routerLink]="['/leaderboard']">
+      <ion-icon name="trophy"></ion-icon>
+      <ion-label>Totals</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="settings" [routerLink]="['/settings']">
+      <ion-icon name="settings"></ion-icon>
+      <ion-label>Settings</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
 </ion-app>

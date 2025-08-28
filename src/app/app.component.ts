@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-
+import { Component, effect, inject, signal } from '@angular/core';
+import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, IonIcon, IonLabel } from '@ionic/angular/standalone';
+import { RouterLink } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { people, trophy, calendar, settings, list } from 'ionicons/icons';
+import { ThemeService } from './services/theme.service';
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html',
-  imports: [IonApp, IonRouterOutlet],
+  standalone: true,
+  imports: [IonApp, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, RouterLink],
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-  constructor() {}
+  private theme = inject(ThemeService);
+  constructor() {
+    addIcons({ people, trophy, calendar, settings, list });
+    // Ensure CSS vars/class apply on boot.
+    this.theme.applyCurrentTheme();
+  }
 }

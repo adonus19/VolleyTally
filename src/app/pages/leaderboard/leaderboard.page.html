@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Season Totals</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    @if(rows().length) {
+        <ion-list>
+            @for(r of rows(); track r.playerId; let i = $index) {
+                <ion-item>
+                    <ion-label>
+                        <h2>{{ i+1 }}. {{ nameFor(r.playerId) }}</h2>
+                    </ion-label>
+                    <ion-badge slot="end">{{ r.count }}</ion-badge>
+                </ion-item>
+            }
+        </ion-list>
+    } @else {
+        <div style="padding:24px;text-align:center;">
+            <p>No points yet.</p>
+        </div>
+    }
+</ion-content>

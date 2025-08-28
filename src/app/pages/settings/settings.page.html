@@ -1,0 +1,25 @@
+<ion-header><ion-toolbar color="primary"><ion-title>Settings</ion-title></ion-toolbar></ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label position="stacked">Primary Color (hex)</ion-label>
+            <ion-input [(ngModel)]="primary"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked">Secondary Color (hex)</ion-label>
+            <ion-input [(ngModel)]="secondary"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Dark Mode</ion-label>
+            <ion-toggle [(ngModel)]="darkMode"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Winners per session: {{ winnersCount }}</ion-label>
+            <ion-range min="1" max="10" step="1" [(ngModel)]="winnersCount"></ion-range>
+        </ion-item>
+    </ion-list>
+    <div style="padding:12px;display:flex;gap:8px;">
+        <ion-button (click)="save()">Save</ion-button>
+        <ion-button fill="outline" (click)="reset()">Reset Defaults</ion-button>
+    </div>
+</ion-content>
